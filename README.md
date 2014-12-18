@@ -3,7 +3,7 @@ HTMLcountdownTimer
 ![Screenshot](https://raw.githubusercontent.com/sdenel/HTMLcountdownTimer/master/inc/screenshot.png)
 
 
-A simple HTML countdown timer.
+A simple HTML countdown timer, using AngularJS.
 
 Available online on rawgit: [https://rawgit.com/sdenel/HTMLcountdownTimer/master/index.html](https://rawgit.com/sdenel/HTMLcountdownTimer/master/index.html)
 
