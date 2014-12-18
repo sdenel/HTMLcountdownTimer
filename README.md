@@ -2,6 +2,7 @@ HTMLcountdownTimer
 ==================
 
 A simple HTML countdown timer.
+Available online on rawgit: [https://rawgit.com/sdenel/HTMLcountdownTimer/master/index.html](https://rawgit.com/sdenel/HTMLcountdownTimer/master/index.html)
 
 Licence
 =======
