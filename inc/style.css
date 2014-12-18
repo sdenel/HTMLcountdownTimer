@@ -31,4 +31,27 @@ body {
 #setup {
 	border:1px black solid;
 	padding:5px;
+	background:white;
+
 }
+
+
+/*
+ * CSS for animation purposes
+ */
+#setup {
+	opacity:1;
+}
+
+#setup {
+	-webkit-transition: 0.5s linear all;
+	-moz-transition: 0.5s linear all;
+	-o-transition: 0.5s linear all;
+	transition: 0.5s linear all;
+}
+
+#setup.ng-hide {
+  opacity:0;
+}
+
+

@@ -1,4 +1,4 @@
-var mainApp = angular.module('mainApp', []);
+var mainApp = angular.module('mainApp', ['ngAnimate']);
 
 mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
 	$scope.timeLengthDisplayed = '55:00';
