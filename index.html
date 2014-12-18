@@ -15,23 +15,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
     <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.js"></script> -->
 
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="inc/script.js"></script>
+    <link rel="stylesheet" href="inc/style.css">
 	<link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body>
 	<div id="chronometer">
 		<span>{{remainingTime}}</span>
 		<div>
-			<button class="btn btn-default" ng-click="chronoStart()">Start</button>
-			<button class="btn btn-default" ng-click="chronoStop()">Stop</button>
+			<button class="btn btn-default" ng-click="chronoStartStop()" ng-bind="stopStartLabel"></button>
 			<button class="btn btn-default" ng-click="chronoReset()">Reset</button>
 		</div>
 	</div>
 
 <div id="setup" ng-hide="isOn" class="ng-hide">
-	<label for="timeLengthDisplayed"  class="control-label">Count down departure:</label>&nbsp;<input type="text" name="" ng-model="timeLengthDisplayed" class="input-small" style="width:60px;text-align:center;"/><br />
-	<button class="btn btn-default" ng-click="chronoSetNewTimeCount()">Set and reset</button>
+	<label for="timeLengthDisplayed"  class="control-label">Countdown duration:</label>&nbsp;<input type="text" name="" ng-model="timeLengthDisplayed" class="input-small" style="width:60px;text-align:center;"/><br />
+	<button class="btn btn-default" ng-click="chronoSetNewTimeCountAndReset()">Set and reset</button>
 </div>
 </body>
 </html>

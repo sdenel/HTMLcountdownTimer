@@ -3,16 +3,16 @@ var mainApp = angular.module('mainApp', []);
 mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
 	$scope.timeLengthDisplayed = '55:00';
 
-	var audio = new Audio('66136__theta4__ding30603-spedup.wav');
+	var audio = new Audio('inc/66136__theta4__ding30603-spedup.wav');
 
 	$scope.isOn = false;
 	$scope.remainingTime = null;
 	$scope.timeOffsetMs = 0; // For hold mode
 	$scope.dStart = null;
+	$scope.stopStartLabel = "Start";
 	remainingTimeMs = undefined;
 	displayTimeInTitle = true;
 	alarmTriggered = false;
-
 
 	function daemonFunc() {
 		//console.log("In daemonFunc()");
@@ -54,9 +54,18 @@ mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
 		//console.log(alarmTriggered);
 	}
 
+	$scope.chronoStartStop = function() {
+		if($scope.isOn == true) {
+			chronoStop();
+			$scope.stopStartLabel = "Start";
+		}
+		else {
+			chronoStart();
+			$scope.stopStartLabel = "Stop";
+		}
+	};
 
-
-	$scope.chronoStart = function() {
+	function chronoStart() {
 		$scope.dStart = Date.now();
 		alarmTriggered = false;
 		if($scope.isOn == false) {
@@ -66,7 +75,7 @@ mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
 		displayTimeInTitle = true;		
 	}
 
-	$scope.chronoStop = function() {
+	function chronoStop() {
 		$scope.timeOffset = $scope.timeLength*1000-remainingTimeMs;
 		displayTimeInTitle = true;
 		alarmTriggered = false;
@@ -76,21 +85,20 @@ mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
 	$scope.chronoReset = function() {
 		$scope.dStart = Date.now();
 		$scope.timeOffset = 0;
-		var timeLengthDisplayedArr = $scope.timeLengthDisplayed.split(':');
-		console.log(timeLengthDisplayedArr);
-		$scope.timeLength = parseInt(timeLengthDisplayedArr[0])*60+parseInt(timeLengthDisplayedArr[1]);
-		console.log($scope.timeLength);
 		remainingTimeMs = $scope.timeLength*1000;
 		displayTimeInTitle = true;
 		alarmTriggered = false;
 		refreshDisplay();
-	}
+	};
 
-	$scope.chronoSetNewTimeCount = function() {
-
-	}
+	$scope.chronoSetNewTimeCountAndReset = function() {
+		var timeLengthDisplayedArr = $scope.timeLengthDisplayed.split(':');
+		$scope.timeLength = parseInt(timeLengthDisplayedArr[0])*60+parseInt(timeLengthDisplayedArr[1]);
+		$scope.chronoReset();
+	};
 	
-	$scope.chronoReset();
+
+	$scope.chronoSetNewTimeCountAndReset();
 	refreshDisplay();
 
 	window.onbeforeunload = confirmExit;
