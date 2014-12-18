@@ -1,0 +1,34 @@
+html {
+
+}
+
+body {
+
+}
+
+
+#chronometer {
+	background-color:black;
+	padding:5px;
+	padding-top:0px;
+}
+
+#chronometer span {
+	color:white;
+	font-size:80px;
+	padding:0px;
+	margin:0px;
+}
+
+#chronometer, #setup {
+	width:300px;
+	margin:20px;
+    margin-left: auto;
+    margin-right: auto;
+	text-align:center;
+}
+
+#setup {
+	border:1px black solid;
+	padding:5px;
+}
