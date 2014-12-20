@@ -1,7 +1,18 @@
 var mainApp = angular.module('mainApp', ['ngAnimate']);
 
 mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
-	$scope.timeLengthDisplayed = '55:00';
+	var hash = window.location.hash.substring(1);
+
+	$scope.timeLengthDisplayed = parseTime((hash != '') ? hash : '55:00');
+
+	
+
+	function parseTime(v) {
+		if(v.indexOf(':') == -1) {
+			v = v+':'+'00';
+		}
+		return v;
+	}
 
 	var audio = new Audio('inc/66136__theta4__ding30603-spedup.wav');
 
@@ -92,7 +103,11 @@ mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
 	};
 
 	$scope.chronoSetNewTimeCountAndReset = function() {
+		$scope.timeLengthDisplayed = parseTime($scope.timeLengthDisplayed)
+
 		var timeLengthDisplayedArr = $scope.timeLengthDisplayed.split(':');
+
+		window.location = window.location.pathname+'#'+$scope.timeLengthDisplayed
 		$scope.timeLength = parseInt(timeLengthDisplayedArr[0])*60+parseInt(timeLengthDisplayedArr[1]);
 		$scope.chronoReset();
 	};
@@ -109,6 +124,5 @@ mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
 	}
 
 });
-
 
 
