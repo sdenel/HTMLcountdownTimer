@@ -23,15 +23,30 @@
 	<div id="chronometer">
 		<span>{{remainingTime}}</span>
 		<div>
-			<button class="btn btn-default" ng-click="chronoStartStop()" ng-bind="stopStartLabel"></button>
+			<button class="btn btn-default" ng-click="chronoStartStop()" ng-bind="stopStartLabel" ng-show="!isOn || stoppable"></button>
 			<button class="btn btn-default" ng-click="chronoReset()">Reset</button>
+            <button class="btn btn-default" ng-click="displaySettings = !displaySettings" ng-show="!isOn">Toogle settings</button>
 		</div>
+
 	</div>
 
-<div id="setup" ng-hide="isOn">
-	<label for="timeLengthDisplayed"  class="control-label">Countdown duration:</label>&nbsp;<input type="text" name="" ng-model="timeLengthDisplayed" class="input-small" style="width:60px;text-align:center;"/><br />
-	<button class="btn btn-default" ng-click="chronoSetNewTimeCountAndReset()">Set and reset</button>
-</div>
+    <div id="setup" ng-hide="isOn || !displaySettings">
+        <div style="border:1px black solid;padding:5px;margin-bottom:5px;">
+	        <label for="timeLengthDisplayed" class="control-label" style="display:inline-block;width:150px;">Countdown duration:</label>&nbsp;<input type="text" name="" ng-model="payload.timeLengthDisplayed" class="input-small" style="width:60px;text-align:center;"/><br />
+            <input type="checkbox" id="stoppable" ng-model="payload.stoppable"/> <label for="stoppable">Make pomodero stoppable</label><br />
+            <input type="checkbox" id="askConfirmReset" ng-model="payload.askConfirmReset"/> <label for="askConfirmReset">Ask confirmation for reset</label><br />
+            <span style="display:inline-block;width:150px;">Background image:</span> <input type="text" ng-model="payload.backgroundImage" style="width:400px;" />
+        </div>
+        <h2>Quotes</h2>
+        <div ng-repeat="quote in payload.quotes" style="border:1px black solid;padding:5px;margin-bottom:5px;">
+            <span style="display:inline-block;width:150px;">Title: </span><input type="text" ng-model="payload.quotes[$index].title" style="width:400px;"><br />
+            <span style="display:inline-block;width:150px;">Quote: </span><input type="text" ng-model="payload.quotes[$index].quote" style="width:400px;"><br />
+            <a ng-click="deleteQuote($index)">Delete this quote</a></div>
+        <a ng-click="addQuote()">Add a quote</a><br />
+	    <button class="btn btn-default" ng-click="chronoSetNewTimeCountAndReset()">Set and reset</button>
+    </div>
+
+    <div id="quotes"><!-- This block is filled by JavaScript --></div>
 </body>
 </html>
 

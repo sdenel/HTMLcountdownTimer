@@ -1,46 +1,51 @@
 html {
-
+    background-size: 100% auto;
 }
 
 body {
-
+    background-color: none;
+    background: transparent;
 }
 
+a {
+    cursor: pointer;
+}
 
-#chronometer {
-	background-color:black;
+#chronometer, #quotes, #setup {
+	background-color:white;
 	padding:5px;
-	padding-top:0px;
-}
-
-#chronometer span {
-	color:white;
-	font-size:80px;
-	padding:0px;
-	margin:0px;
-}
-
-#chronometer, #setup {
-	width:300px;
-	margin:20px;
+    border-radius:5px;
+    opacity:0.9;
+    width:800px;
+    margin:10px;
     margin-left: auto;
     margin-right: auto;
 	text-align:center;
 }
 
-#setup {
-	border:1px black solid;
-	padding:5px;
-	background:white;
-
+#chronometer span {
+	color:black;
+	font-size:80px;
+	padding:0px;
+	margin:0px;
 }
 
+#quotes p {
+    font-size:large;
+}
+#quotes h1 {
+    margin:0px;
+}
+
+#setup {
+    text-align:left;-
+}
 
 /*
  * CSS for animation purposes
  */
 #setup {
-	opacity:1;
+	opacity:0.9;
 }
 
 #setup {
