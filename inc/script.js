@@ -121,7 +121,6 @@ mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
             chronoStop();
             $scope.stopStartLabel = "Start";
             $scope.timeOffset = 0;
-            remainingTimeMs = $scope.timeLength*1000;
             displayTimeInTitle = true;
             alarmTriggered = false;
 
@@ -129,6 +128,8 @@ mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
              * Default value for timing + parsing
              */
             if($scope.payload.timeLengthDisplayed == undefined) $scope.payload.timeLengthDisplayed = '30:00';
+		    $scope.payload.timeLengthDisplayed = parseTime($scope.payload.timeLengthDisplayed);
+
 
             /*
              * Default value for quotes
@@ -155,6 +156,10 @@ mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
             if($scope.payload.stoppable == undefined) $scope.payload.stoppable = true;
             $scope.stoppable = $scope.payload.stoppable;
 
+		    var timeLengthDisplayedArr = $scope.payload.timeLengthDisplayed.split(':');
+		    window.location = window.location.pathname+'#'+encodeURIComponent(JSON.stringify($scope.payload));
+		    $scope.timeLength = parseInt(timeLengthDisplayedArr[0])*60+parseInt(timeLengthDisplayedArr[1]);
+            remainingTimeMs = $scope.timeLength*1000;
             refreshDisplay();
         }
 
@@ -163,17 +168,6 @@ mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
             if(confirmStatus == true) action();
         }
         else action();
-	};
-
-	$scope.chronoSetNewTimeCountAndReset = function() {
-		$scope.payload.timeLengthDisplayed = parseTime($scope.payload.timeLengthDisplayed);
-
-		var timeLengthDisplayedArr = $scope.payload.timeLengthDisplayed.split(':');
-
-        var obj = 
-		window.location = window.location.pathname+'#'+encodeURIComponent(JSON.stringify($scope.payload));
-		$scope.timeLength = parseInt(timeLengthDisplayedArr[0])*60+parseInt(timeLengthDisplayedArr[1]);
-		$scope.chronoReset(true);
 	};
 	
 
@@ -185,8 +179,7 @@ mainApp.controller('mainCtrl', function($scope, $http, $timeout) {
         $scope.payload.quotes.push({title:"", quote:""});
     }
 
-	$scope.chronoSetNewTimeCountAndReset();
-	refreshDisplay();
+    $scope.chronoReset();
 
 	window.onbeforeunload = confirmExit;
 	function confirmExit() {
